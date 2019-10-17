@@ -23,6 +23,7 @@ fi
 
 export PATH=$HOME/.local/bin:$PATH 
 export ANDROID_HOME=$HOME/Android/Sdk                                                                                                                                                
-export PATH=${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/tools:$PATH
+export PATH=${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:$PATH
 export PATH=$HOME/flutter_sdk/flutter/bin:$PATH
-export PATH=/snap/android-studio/current/android-studio/jre:$PATH
+#export PATH=/snap/android-studio/current/android-studio/jre/bin:$PATH
+#export LD_LIBRARY_PATH=/snap/android-studio/current/android-studio/jre/lib:$LD_LIBRARY_PATH

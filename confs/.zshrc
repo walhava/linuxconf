@@ -106,7 +106,7 @@ alias tmux="tmux -u"
 export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 alias gitroot='cd "$(git rev-parse --show-cdup)"'
-source .profile
+source $HOME/.profile
 
 #git clone git://github.com/gradle/gradle-completion ~/.zsh/gradle-completion
 fpath=(/home/w/.zsh/gradle-completion $fpath)
