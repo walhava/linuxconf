@@ -26,7 +26,9 @@ else
 	git pull
 fi
 
+cd $LINUXCONF
 
-	
+./update_linux_conf.sh
+
 	
 	
