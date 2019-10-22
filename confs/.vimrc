@@ -34,4 +34,4 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 syntax enable
-colorscheme dracula
+colorscheme darcula

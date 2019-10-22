@@ -19,6 +19,10 @@ if [ ! -d "$LINUXCONF" ]; then
 	
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
+	mkdir -p ~/.vim/colors
+	wget https://raw.githubusercontent.com/blueshirts/darcula/master/colors/darcula.vim -O .vim/colors/darcula.vim
+
+
 	echo cloning github.com/walhava/linuxconf to $LINUXCONF
 	git clone git@github.com:walhava/linuxconf.git  $LINUXCONF
 	cd $LINUXCONF
