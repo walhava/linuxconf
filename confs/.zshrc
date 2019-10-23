@@ -61,6 +61,11 @@ CASE_SENSITIVE="true"
 plugins=(
   git
 )
+#git clone git://github.com/gradle/gradle-completion ~/.zsh/gradle-completion
+fpath=(/home/w/.zsh/gradle-completion $fpath)
+#git clone https://github.com/esc/conda-zsh-completion ~/.zsh/conda-zsh-completion
+
+fpath+=$HOME/.zsh/conda-zsh-completion
 
 source $ZSH/oh-my-zsh.sh
 
@@ -104,9 +109,10 @@ function mkcddir() {
 
 alias tmux="tmux -u"
 export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+export PATH=/$HOME/bin:$PATH
+export PATH=/$HOME/miniconda3/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 alias gitroot='cd "$(git rev-parse --show-cdup)"'
 source $HOME/.profile
 
-#git clone git://github.com/gradle/gradle-completion ~/.zsh/gradle-completion
-fpath=(/home/w/.zsh/gradle-completion $fpath)
+
