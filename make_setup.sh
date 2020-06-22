@@ -15,7 +15,7 @@ if [ ! -d "$LINUXCONF" ]; then
 
 	sh -c "$(wget -O- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-	chsh -s $(which zsh)
+	chsh -s "$(command -v zsh)" "$(USER)"
 	
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
@@ -26,16 +26,14 @@ if [ ! -d "$LINUXCONF" ]; then
 	wget https://raw.githubusercontent.com/blueshirts/darcula/master/colors/darcula.vim -O .vim/colors/darcula.vim
 
 
-	echo cloning github.com/walhava/linuxconf to $LINUXCONF
-	git clone git@github.com:walhava/linuxconf.git  $LINUXCONF
-	cd $LINUXCONF
+	echo cloning github.com/walhava/linuxconf to "$LINUXCONF"
+	git clone https://github.com/walhava/linuxconf.git "$LINUXCONF"
 else
 	echo updating linux conf
-	cd $LINUXCONF
-	git pull
 fi
 
-cd $LINUXCONF
+cd "$LINUXCONF" || exit 1
+git pull
 
 ./update_linux_conf.sh
 
