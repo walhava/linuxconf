@@ -7,7 +7,8 @@
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="agnoster"
+#ZSH_THEME="robbyrussell"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -102,6 +103,10 @@ function disable_touchpad() {
 	xinput --disable `xinput | grep "Synaptics TouchPad" | cut -d '=' -f2 | cut -f1`
 }
 
+function disable_touchscreen() {
+	xinput --disable `xinput | grep "Wacom Pen and multitouch sensor Finger" | cut -d '=' -f2 | cut -f1`
+}
+
 function mkcddir() {
 	mkdir -p $1
 	cd $1
@@ -113,6 +118,11 @@ export PATH=/$HOME/bin:$PATH
 export PATH=/$HOME/miniconda3/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 alias gitroot='cd "$(git rev-parse --show-cdup)"'
+
+alias lint="./bark.sh --stage lint"
+[[ /snap/bin/kubectl ]] && source <(kubectl completion zsh)
+
+
 source $HOME/.profile
 
 
