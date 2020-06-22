@@ -23,7 +23,7 @@ if [ ! -d "$LINUXCONF" ]; then
 	git clone https://github.com/esc/conda-zsh-completion ~/.zsh/conda-zsh-completion
 
 	mkdir -p ~/.vim/colors
-	wget https://raw.githubusercontent.com/blueshirts/darcula/master/colors/darcula.vim -O .vim/colors/darcula.vim
+	wget https://raw.githubusercontent.com/blueshirts/darcula/master/colors/darcula.vim -O ~/.vim/colors/darcula.vim
 
 
 	echo cloning github.com/walhava/linuxconf to "$LINUXCONF"
