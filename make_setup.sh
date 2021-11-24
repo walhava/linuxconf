@@ -13,7 +13,7 @@ if [ ! -d "$LINUXCONF" ]; then
 		tmux \
 		zsh
 
-	sh -c "$(wget -O- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+	sh -c "RUNZSH=no $(wget -O- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 	chsh -s "$(command -v zsh)" "$(USER)"
 	
