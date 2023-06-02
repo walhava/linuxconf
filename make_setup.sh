@@ -25,6 +25,9 @@ if [ ! -d "$LINUXCONF" ]; then
 	mkdir -p ~/.vim/colors
 	wget https://raw.githubusercontent.com/blueshirts/darcula/master/colors/darcula.vim -O ~/.vim/colors/darcula.vim
 
+	# kubectl 
+	curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+	sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
 	echo cloning github.com/walhava/linuxconf to "$LINUXCONF"
 	git clone https://github.com/walhava/linuxconf.git "$LINUXCONF"
