@@ -21,6 +21,7 @@ if [ ! -d "$LINUXCONF" ]; then
 
 	git clone git://github.com/gradle/gradle-completion
 	git clone https://github.com/esc/conda-zsh-completion ~/.zsh/conda-zsh-completion
+	git clone https://github.com/jonmosco/kube-tmux.git ~/.tmux/kube-tmux
 
 	mkdir -p ~/.vim/colors
 	wget https://raw.githubusercontent.com/blueshirts/darcula/master/colors/darcula.vim -O ~/.vim/colors/darcula.vim

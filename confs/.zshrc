@@ -37,6 +37,9 @@ function charging_current() {
     printf "%s%.1f %s\n" "$sign" "$value" "$unit"
 }
 
+function faha_uuid() {
+  python -c "import uuid; print(uuid.uuid5(uuid.NAMESPACE_URL, 'constant://faha/database/'+'$1'))"
+}
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
@@ -79,6 +82,7 @@ function charging_current() {
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  kube-ps1
 )
 
 #git clone git://github.com/gradle/gradle-completion ~/.zsh/gradle-completion
@@ -166,9 +170,9 @@ autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
 complete -C '/usr/local/bin/aws_completer' aws
 
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+#export PYENV_ROOT="$HOME/.pyenv"
+#command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+#eval "$(pyenv init -)"
 
 
 # fnm
