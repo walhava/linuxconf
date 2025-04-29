@@ -35,6 +35,7 @@ source $ZSH/oh-my-zsh.sh
 
 
 export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+export PATH=/$HOME/Android/Sdk/platform-tools:$PATH
 export PATH=/$HOME/bin:$PATH
 export PATH=/$HOME/miniconda3/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
@@ -115,10 +116,10 @@ function mkcddir() {
 
 # Function to update RPROMPT before each prompt display
 update_rprompt() {
-    RPROMPT="$(kube_context)$(tf_workspace)$(charging_current)"
+    VKA_VARS="$(kube_context)$(tf_workspace)$(charging_current)"
 }
 
-precmd_functions+=(update_rprompt)
+#precmd_functions+=(update_rprompt)
 
 prompt_end() {
   if [[ -n $CURRENT_BG ]]; then
@@ -130,18 +131,14 @@ prompt_end() {
   print -n "%{%f%}"
   CURRENT_BG=''
 
-  printf "\n>";
+  print -n "\n%{%f%b%k%}>"
 }
 
 
-autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
+autoload -Uz bashcompinit && bashcompinit
 complete -C '/usr/local/bin/aws_completer' aws
 
-
-# fnm
-export PATH="/home/w/.local/share/fnm:$PATH"
-eval "`fnm env`"
 
 fpath=($fpath ~/.zsh/completion)
 
@@ -153,15 +150,49 @@ export NVM_DIR="$HOME/.nvm"
 export PYENV_ROOT="$HOME/.pyenv"
 
 
+tf() {
+  if [ "$#" -lt 1 ]; then
+    echo "Usage: tf <command> [args...]"
+    return 1
+  fi
+
+  local cmd="$1"
+  shift
+
+  local ws
+  ws=$(terraform workspace show)
+  echo "Using workspace '${ws}'"
+
+  local var_file
+  var_file=$(find workspace-tfvars -type f -name "${ws}.tfvars" -print -quit 2>/dev/null)
+
+  if [ -z "$var_file" ]; then
+    echo "No variable file found for workspace '${ws}' in 'workspace-tfvars'" >&2
+    return 1
+  fi
+
+  terraform "$cmd" -var-file="$var_file" "$@"
+}
+
+tfns() {
+  if [ ! -d workspace-tfvars ]; then
+    echo "Directory 'workspace-tfvars' does not exist" >&2
+    return 1
+  fi
+
+  find workspace-tfvars -maxdepth 1 -type f -name "*.tfvars" -exec basename {} .tfvars \;
+}
+alias tfapply='tf apply'
+alias tfdestroy='tf destroy'
+alias tfplan='tf plan'
+alias tfimport='tf import'
 
 alias fs="./fhmakew.sh --setup"
 alias gitroot='cd "$(git rev-parse --show-cdup)"'
-alias tfapply='terraform apply -var-file="workspace-tfvars/$(terraform workspace show).tfvars"'
-alias tfdestroy='terraform destroy -var-file="workspace-tfvars/$(terraform workspace show).tfvars"'
-alias tfplan='terraform plan -var-file="workspace-tfvars/$(terraform workspace show).tfvars"'
 alias tmux="tmux -u"
 alias xsc="xclip -selection clipboard"
 alias git_deletemergedbranches='git fetch -p && for branch in $(git branch -vv | grep ": gone]" | awk "{print $1}"); do git branch -D $branch; done'
 
+source <(kubectl completion zsh)
 PROMPT="%(?..%F{red}%B(%?%)%b%f)${PROMPT}"
-RPROMPT="$(tf_workspace)$(charging_current)"
+PROMPT='$(kube_context)$(tf_workspace)$(charging_current)'${PROMPT}

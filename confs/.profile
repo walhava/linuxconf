@@ -27,4 +27,4 @@ export PATH=${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/tools:${ANDROID_HOME}
 export PATH=$HOME/flutter_sdk/flutter/bin:$PATH
 #export PATH=/snap/android-studio/current/android-studio/jre/bin:$PATH
 #export LD_LIBRARY_PATH=/snap/android-studio/current/android-studio/jre/lib:$LD_LIBRARY_PATH
-. "$HOME/.cargo/env"
+#. "$HOME/.cargo/env"
